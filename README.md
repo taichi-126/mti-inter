@@ -16,6 +16,7 @@ classDiagram
         password
         age
         height
+　　　　　　　　　　　　　　　　weight
     }
 
     class Dishes {
