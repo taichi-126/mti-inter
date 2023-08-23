@@ -92,17 +92,23 @@ classDiagram
 
 ### DishesテーブルのAPI
 
-| 操作   | Method | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
-|--------|--------|--------------------|-----------------------------------------------|------------------------------|
-| 登録   | POST   | `/dishes`          | userId, dishName, ingredients                 | success/error, dishName        |
-| 取得   | GET    | `/dishes？dishId` | -                                             | dishName, ingredients, Nutrients |
-| 削除   | DELETE | `/dishes?dishId` | -                                             | success/error                  |
+| 操作   | Method | 処理の内容 | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
+|--------|----|----|--------------------|-----------------------------------------------|------------------------------|
+| 登録   | POST   | 新しい料理を追加. | `/dishes`          | userId, dishName, ingredients                 | success/error, dishName        |
+| 取得   | GET    | ユーザーがすでに登録した料理の一覧を表示. | `/dishes？userId` | -                                             | List<dishName> |
+| 削除   | DELETE | ユーザーがすでに登録した料理を削除. | `/dishes?dishId&userId` | -                                             | success/error                  |
 
 ### DailyMealsTableのAPI
 
-| 操作   | Method | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
-|--------|--------|-------------------------------|----------------------------------|--------------------------|
-| 登録   | POST   | `/daily-meals`                | UserId, Date, MealType, Dishes   | success/error, TotalNutrients |
+| 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
+|--------|-------|--|-------------------------------|----------------------------------|--------------------------|
+| 登録   | POST   |  朝・昼・夜の食事を料理から選択し投稿. | `/daily-meals`                | UserId, Date, MealType, Dishes   | success/error, TotalNutrients |
+
+### IngredientsTableのAPI
+
+| 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
+|--------|------|--|-------------------------------|----------------------------------|--------------------------|
+| 登録   | GET   | 料理新規追加時に一覧を表示 |  `/ingredients`                |   | success/error, list<ingredientName> |
 
 
 
