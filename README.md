@@ -103,6 +103,8 @@ classDiagram
 | 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
 |--------|-------|--|-------------------------------|----------------------------------|--------------------------|
 | 登録   | POST   |  朝・昼・夜の食事を料理から選択し投稿. | `/daily-meals`                | UserId, Date, MealType, Dishes   | success/error, TotalNutrients |
+| 変更   | PUT   |  一度,保存した食事内容を変更. | `/daily-meals`                | UserId, Date, MealType, Dishes   | success/error, TotalNutrients |
+| 取得   | GET   |  その日の合計栄養値を取得. | `/daily-meals?userId&date`                |   | success/error, TotalNutrients |
 
 ### IngredientsTableのAPI
 
