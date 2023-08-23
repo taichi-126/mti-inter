@@ -23,20 +23,20 @@ classDiagram
         +dishName (PK)
         +userId (SK)
         ingredients
-        Nutrients
+        nutrients
     }
 
     class DailyMealsTable {
         +UserId (PK)
         +Date (SK)
-        MealType
-        Dishes
-        TotalNutrients
+        mealType
+        dishes
+        totalNutrients
     }
 
     class Ingredients {
         +ingredientName (PK)
-        Nutrients
+        nutrients
     }
 
 ```
@@ -60,7 +60,7 @@ classDiagram
 | dishName       | 料理の名前 (パーティションキー)                               |
 | userId       | ユーザーID (ソートキー)                                   |
 | ingredients  | 原材料をマップ形式で重量と保存. [{"name": "tomato", "weight":100}, ]                          |
-| Nutrients    | 原材料から計算された栄養成分情報                             |
+| nutrients    | 原材料から計算された栄養成分情報                             |
 
 ---
 
@@ -69,11 +69,11 @@ classDiagram
 
 | カラム名     | 説明                               |
 |------------|----------------------------------|
-| UserId     | ユーザーのID (パーティションキー)          |
-| Date   | 食事の日 (ソートキー)                  |
-| MealType   | 朝食、昼食、夕食など                        |
-| Dishes     | 選択された料理のリスト(料理IDや名前、量など) |
-| TotalNutrients| その日の全ての栄養素の合計                      |
+| userId     | ユーザーのID (パーティションキー)          |
+| date   | 食事の日 (ソートキー)                  |
+| mealType   | 朝食、昼食、夕食など                        |
+| dishes     | 選択された料理のリスト(料理IDや名前、量など) |
+| totalNutrients| その日の全ての栄養素の合計                      |
 
 ---
 
@@ -83,7 +83,7 @@ classDiagram
 | カラム名        | 説明                               |
 |---------------|----------------------------------|
 | ingredientName| 原材料の名前(パーティションキー)                 　|
-| Nutrients     | 原材料の栄養成分情報                          |
+| nutrients     | 原材料の栄養成分情報                          |
 
 ---
 
