@@ -94,7 +94,7 @@ classDiagram
 
 | 操作   | Method | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
 |--------|--------|--------------------|-----------------------------------------------|------------------------------|
-| 登録   | POST   | `/dishes`          | userId, dishName, ingredients                 | success/error, dishId        |
+| 登録   | POST   | `/dishes`          | userId, dishName, ingredients                 | success/error, dishName        |
 | 取得   | GET    | `/dishes？dishId` | -                                             | dishName, ingredients, Nutrients |
 | 削除   | DELETE | `/dishes?dishId` | -                                             | success/error                  |
 
