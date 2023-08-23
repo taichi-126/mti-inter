@@ -59,7 +59,7 @@ classDiagram
 |--------------|--------------------------------------------------|
 | dishName       | 料理の名前 (パーティションキー)                               |
 | userId       | ユーザーID (ソートキー)                                   |
-| ingredients  | 原材料をリストで保存                                   |
+| ingredients  | 原材料をマップ形式で重量と保存. [{"name": "tomato", "weight":100}, ]                          |
 | Nutrients    | 原材料から計算された栄養成分情報                             |
 
 ---
@@ -86,4 +86,23 @@ classDiagram
 | Nutrients     | 原材料の栄養成分情報                          |
 
 ---
+
+
+### Web REST API 設計
+
+### DishesテーブルのAPI
+
+| 操作   | Method | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
+|--------|--------|--------------------|-----------------------------------------------|------------------------------|
+| 登録   | POST   | `/dishes`          | userId, dishName, ingredients                 | success/error, dishId        |
+| 取得   | GET    | `/dishes？dishId` | -                                             | dishName, ingredients, Nutrients |
+| 削除   | DELETE | `/dishes?dishId` | -                                             | success/error                  |
+
+### DailyMealsTableのAPI
+
+| 操作   | Method | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
+|--------|--------|-------------------------------|----------------------------------|--------------------------|
+| 登録   | POST   | `/daily-meals`                | UserId, Date, MealType, Dishes   | success/error, TotalNutrients |
+
+
 
