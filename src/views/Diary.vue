@@ -22,6 +22,13 @@
       </p>
 
       <!-- 投稿ボックス -->
+      
+      <!-- 日じ -->
+      <h1>今日の日時は</h1>
+      <p class="date">{{ date }}</p>
+      <p class="month">{{ month }}</p>
+      
+      
       <div class="ui segment">
         <form class="ui form" @submit.prevent="postArticle">
           <div class="field">
@@ -186,6 +193,9 @@ export default {
       successMsg: "",
       errorMsg: "",
       isCallingApi: false,
+      // date data
+      month: "",
+      date: "",
     };
   },
 
@@ -203,6 +213,11 @@ export default {
   created: async function () {
     // Vue.jsの読み込みが完了したときに実行する処理はここに記述する
     // apiからarticleを取得する
+    
+    let currentDate = new Date();
+    this.month = (currentDate.getMonth()+1); 
+    this.day = currentDate.getDay(); 
+    
 
     if (
       window.localStorage.getItem("userId") &&
@@ -386,6 +401,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>

@@ -212,7 +212,7 @@ export default {
       this.$router.push({ name: "Login" });
     }
     
-    // this.$router.push({ name: "Record"});
+    this.$router.push({ name: "Diary"});
   },
 
   methods: {
