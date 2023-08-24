@@ -52,7 +52,6 @@ exports.handler = async (event, context) => {
       sex,
       age,
       height,
-      weight,
       token: "mtiToken",
     });
   } catch (e) {
