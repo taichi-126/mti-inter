@@ -48,9 +48,9 @@ exports.handler = async (event, context) => {
     try {
       // ingredientsTable から原材料の栄養情報を取得
       const ingredientParams = {
-        TableName: "team3_food", //テーブルネーム変更
+        TableName: "team3_ingredients", 
         Key: marshall({
-          food: ingredientName //パーティションキーの名前を変更
+          ingredientName
         })
       };
 
