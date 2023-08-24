@@ -324,6 +324,36 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 
+##### PUT `/daily-meals`
+優先度低め. ユーザーは食べた食事の料理を変更できる. 
+```
+// 料理の変更のrequest
+{
+    "userId": "team3",
+    "date": 20230824,
+    "dishes": [
+        { "dishName":"チキントマト", "quantity":1 },
+        { "dishName":"オニオンサラダ", "quantity":1 }
+    ],
+    "mealType": "dinner"
+}
+```
+```
+// response
+{
+    "totalNutrients": {
+        "vitamineD": 12.185,
+        "calcium": 70,
+        "protein": 10,
+        "epa": 1,
+        "iron": 13,
+        "dha": 1,
+        "vitamineD12": 25,
+        "zinc": 20
+    }
+}
+```
+
 ----
 #### ingredients関連
 ##### GET `/ingredients`
