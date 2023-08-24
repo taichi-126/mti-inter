@@ -5,8 +5,6 @@
 
 <h2>今日の食材</h2>
 
-<!-- loop -->
-
  
   
   <table>
@@ -17,12 +15,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(name, quantity) in meals" >
+      <tr v-for="(key, index) in tableCol" :key="index">
         <td>
-          <option v-for="dish in dishes" :value="dish">{{dish}}</option>
+          <select class="ui fluid search dropdown" v-on:change="selectDish">
+            <option v-for="dish in dishes" :value="dish">{{dish}}</option>
+          </select>
         </td>
         <td>
-          <p>年齢</p>
+          <div v-if="quantityFlags[index]">
+            <input  v-model.number="quantity"  type="number" min="1" placeholder="Age" v-on:change="selectQuantity(index)" />
+          </div>
         </td>
       </tr>
     </tbody>
@@ -31,23 +33,8 @@
   
 
 
-<select class="ui fluid search dropdown">
-  <!-- tabel =>
-  cssをいじる
-  
-  formを追加して, buttonをクリックしたら追加
-  
-  -->
- 
-  
-  <template v-for="(meal, index) in meals" v-bind:key="meal.index">
-    <option v-for="dish in dishes" :value="dish">{{dish}}</option>
-    <button v-on:click="del(index)">削除</button>
-  </template>
-</select>
-
 <button v-on:click="add">行を追加</button>
-
+<button v-on:click="del">削除</button>
 
 <div class="">aa</div>
   <div class="record-button">
@@ -81,8 +68,15 @@ export default {
     return {
       userId: "",
       dishes: [],
+      date: "",
       
-      meals: [{ name: "", quantity: 0 }],
+      quantity: 1,
+      
+      tableCol: [{key: ""}],
+      meals: [],
+      
+      quantityFlags: []
+      
     }
 
   },
@@ -95,7 +89,7 @@ export default {
     // Vue.jsの読み込みが完了したときに実行する処理はここに記述する
     // apiからarticleを取得する
     this.userId = window.localStorage.getItem("userId");
-    
+    this.date = window.localStorage.getItem("date");
     try {
       /* global fetch */
       const res = await fetch(baseUrl + `/dishes?userId=${this.userId}`,{
@@ -122,17 +116,28 @@ export default {
   methods: {
     // Vue.jsで使う関数はここで記述する
     async record() {
+ 
+      const userId = this.userId;
+      // const date = this.date
+      //dateの変換
+      const date = 20230824
+      const dishes = this.meals;
+      // ページ遷移で持ってくる
+      const mealType = "dinner"
       
       const reqBody = {
-        
+        userId, date, dishes, mealType
       }
+      console.log(reqBody)
       
       try {
         let path = "/daily-meals";
         /* global fetch */
         const res = await fetch(baseUrl + path, {
           method: "POST",
-          body: JSON.stringify(reqBody)
+          headers: headers,
+          body: JSON.stringify(reqBody),
+          
         });
         
         const text = await res.text();
@@ -153,11 +158,21 @@ export default {
     },
     
     add() {
-      this.meals.push({ name: "", quantity: 0 });
+      this.tableCol.push({ name: "", quantity: 0 });
     },
-    del(index) {
-      this.meals.splice(index, 1)
+    del() {
+      this.tableCol.pop()
+    },
+    
+    selectDish(dish) {
+      this.meals.push({ dishName: dish.target.value, quantity: 1 });
+      this.quantityFlags.push(true);
+    },
+    
+    selectQuantity(index) {
+      this.meals[index]["quantity"] = this.quantity
     }
+    
   },
   
 
