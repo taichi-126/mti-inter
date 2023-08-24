@@ -140,7 +140,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 //リクエスト
 {
-    "userId": "team3",
+    "userId": "nick",
     "password": "password",
     "sex": "male",
     "age": 66,
@@ -151,11 +151,20 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 // response
 {
-    "userId": "team3",
+    "userId": "nick",
     "sex": "male",
     "age": 66,
     "height": 180,
-    "weight": 70,
+    "dailyNutrientGoals": {
+        "protein": 84,
+        "vitaminD": 8.5,
+        "vitaminB12": 2.4,
+        "iron": 8,
+        "dha": 11,
+        "epa": 2,
+        "calcium": 800,
+        "zinc": 11
+    },
     "token": "mtiToken"
 }
 ```
