@@ -41,7 +41,6 @@
                    :data-percent="progressBarWidths(nutrient)"
                    >
                   <div class="bar"></div>
-                  <div class="label">Transferring files</div>
               </div>
                 <div class="tag1">{{progressBarWidths(nutrient)}}% 達成中</div>
                 <p></p><div class="remaining-amount">残り{{ remainingAmount(nutrient) }} g摂取することを目指しましょう！</div>
@@ -210,7 +209,7 @@ export default {
         const percentage = (intake / goal) * 100;
         progressBarWidths[nutrient] = Math.min(percentage, 100);
       }
-      return progressBarWidths[nutrient];
+        return progressBarWidths[nutrient];
     },
     
     remainingAmount(nutrient) {
@@ -221,7 +220,7 @@ export default {
     },
   },
   
-  mounted: async function(){
+  mounted: function(){
         /* global $ */
         $('.ui.dropdown').dropdown({
           allowAdditions:true
