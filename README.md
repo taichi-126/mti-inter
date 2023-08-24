@@ -6,10 +6,10 @@
 
 ```mermaid
 classDiagram
-    User -- DailyMealsTable : 1 - n (ユーザーは多数の食事記録を持つ)
+    User -- DailyMeals : 1 - n (ユーザーは多数の食事記録を持つ)
     User -- Dishes : 1 - n (ユーザーは多数の料理を持つ)
     Ingredients -- Dishes : 1 - n (1つの原材料は多数の料理に使われる)
-    DailyMealsTable -- Dishes : 1 - n (1つの食事記録は多数の料理から成る)
+    DailyMeals -- Dishes : 1 - n (1つの食事記録は多数の料理から成る)
 
     class User {
         +userId (PK)
