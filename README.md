@@ -29,8 +29,8 @@ classDiagram
     }
 
     class DailyMealsTable {
-        +UserId (PK)
-        +Date (SK)
+        +userId (PK)
+        +date (SK)
         mealType
         dishes
         totalNutrients
