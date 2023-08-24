@@ -43,7 +43,7 @@ export default {
           const errorMessage = jsonData.message ?? 'エラーメッセージがありません';
           throw new Error(errorMessage);
         }
-        
+
         // 成功時の処理
         console.log(jsonData);
       } catch (e) {
