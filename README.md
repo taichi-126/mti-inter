@@ -20,7 +20,7 @@
         - [POST `/dishes`](#post-dishes)
         - [GET `/dishes`](#get-dishes)
       - [dailyMeals関連](#dailymeals関連)
-        - [POST `/daily-meals`](#post-dailymeals)
+        - [POST `/daily-meals`](#post-daily-meals)
         - [GET `/daily-meals`](#get-daily-meals)
         - [PUT `/daily-meals`](#put-daily-meals)
       - [ingredients関連](#ingredients関連)
