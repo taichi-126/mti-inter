@@ -152,3 +152,15 @@ classDiagram
 }
 ```
 
+#### GET `/dishes`
+```
+// /dishes?userId=team3
+// レスポンスはdishNameがリストになって返ってくる.
+{
+    "dishes": [
+        "塩オニオン",
+        "オニオンサラダ"
+    ]
+}
+```
+
