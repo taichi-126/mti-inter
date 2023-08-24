@@ -156,6 +156,13 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ### Web REST API 設計
 
 #### Userテーブルに関するAPI
+| 操作   | Method | 処理の内容 | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
+|--------|----|----|--------------------|-----------------------------------------------|------------------------------|
+| 登録   | POST   | 新しいユーザーを登録. | `/user/signup`          | userId, password, age, sex, weight, height                 | success/error, dailyNutrientGoals, token        |
+| 取得   | GET    | ユーザー情報を取得する. | `/user？userId` | userId                                             | 各種User情報（例を参照） |
+| 削除   | DELETE | ユーザー削除. | `/user?userId` | userId                                             | success/error |
+| 変更 | PUT | ユーザー情報を変更. | `/user?userId` | userId | succes/error, dailyNutrientGoals |
+| ログイン | POST | ユーザーのログイン. | `/user/login` | userId, password | success/error, token |
 
 #### Dishesテーブルに関するAPI
 
