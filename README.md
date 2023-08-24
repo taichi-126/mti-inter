@@ -18,6 +18,7 @@ classDiagram
         sex
         height
 　　　　　　　　　　　　　　　　weight
+        dailyNutrientGoals
     }
 
     class Dishes {
@@ -43,6 +44,7 @@ classDiagram
 ```
 
 #### Userテーブル
+dailyNutirientsGoalsはバックエンド側で計算して返す.
 
 | カラム名  | 説明       |
 |---------|-----------|
@@ -52,6 +54,7 @@ classDiagram
 | sex | 性別 |
 | height     | 身長 |
 | weight     | 体重 |
+| dailyNutrientGoals | 1日に取るべき栄養素の目標値(map) 例:{"protein":300, "dhc":100} |
 
 ---
 
