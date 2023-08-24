@@ -94,7 +94,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | userId     | ユーザーのID (パーティションキー)          |
 | date   | 食事の日 (ソートキー)                  |
 | mealType   | 朝食、昼食、夕食など                        |
-| dishes     | 選択された料理のリスト(料理IDや名前、量など) |
+| dishes     | 選択された料理のリスト(料理名前や量など) |
 | totalNutrients| その日の全ての栄養素の合計                      |
 
 ---
