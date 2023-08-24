@@ -20,7 +20,7 @@
         - [POST `/dishes`](#post-dishes)
         - [GET `/dishes`](#get-dishes)
       - [dailyMeals関連](#dailymeals関連)
-        - [POST `/dailyMeals`](#post-dailymeals)
+        - [POST `/daily-meals`](#post-dailymeals)
         - [GET `/daily-meals`](#get-daily-meals)
         - [PUT `/daily-meals`](#put-daily-meals)
       - [ingredients関連](#ingredients関連)
@@ -267,7 +267,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 ----
 #### dailyMeals関連
-##### POST `/dailyMeals`
+##### POST `/daily-meals`
 ```
 // request
 {
