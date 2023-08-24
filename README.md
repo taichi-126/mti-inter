@@ -117,6 +117,30 @@ classDiagram
 
 
 ### 例
+#### POST `/user/signup`
+```
+//リクエスト
+{
+    "userId": "team3",
+    "password": "password",
+    "sex": "male",
+    "age": 66,
+    "height": 180,
+    "weight": 70
+}
+```
+```
+// response
+{
+    "userId": "hagimoto-k",
+    "sex": "male",
+    "age": 66,
+    "height": 180,
+    "weight": 70,
+    "token": "mtiToken"
+}
+```
+
 #### POST `/dishes`
 ```
 // リクエストボディ
