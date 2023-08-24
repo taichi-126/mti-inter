@@ -22,6 +22,7 @@
       - [dailyMeals関連](#dailymeals関連)
         - [POST `/dailyMeals`](#post-dailymeals)
         - [GET `/daily-meals`](#get-daily-meals)
+        - [PUT `/daily-meals`](#put-daily-meals)
       - [ingredients関連](#ingredients関連)
         - [GET `/ingredients`](#get-ingredients)
 
