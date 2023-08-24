@@ -18,9 +18,20 @@
       <div class="ui grid">
     <div class="eight column row">
       <template v-for="(day, index) in days" :key="index">
-          <div class="column"><center>
-            <a href="/" @click="setDate(day)">{{ day.format("D") }}</a>
-            </center></div>
+          <div class="column">
+            <div class="tag" v-if="index==4">
+              <center>
+                <a href="/" @click="setDate(day)">{{ day.format("D") }}</a>
+              </center>              
+            </div>
+            
+            <div class="active-tag" v-if="index!==4">
+              <center>
+                <a href="/" @click="setDate(day)">{{ day.format("D") }}</a>
+              </center>              
+            </div>
+            
+            </div>
       </template>
     </div>
     </div>
@@ -30,29 +41,24 @@
     </div>
     
     <div class="chart-seqment">
-      
          <div>
           <h1>栄養素表示</h1>
           <div class="ui main container">
             <div class="progress-bar-container">
               <div v-for="(nutrient, index) in nutrients" :key="index" class="progress-bar-wrapper">
-                <div class="nutrient-label"><h3>{{ nutrients_ja[index] }}</h3></div>
-                 <div name="progress" class="ui green progress" 
-                   :data-percent="progressBarWidths(nutrient)"
-                   >
+                <!--<div class="nutrient-label"><h3>{{ nutrients_ja[index] }}</h3></div>-->
+                 <div name="progress" class="ui green progress" :data-percent="progressBarWidthsFunc(nutrient)">
                   <div class="bar"></div>
-              </div>
-                <div class="tag1">{{progressBarWidths(nutrient)}}% 達成中</div>
+                </div>
+                <div class="tag1">{{progressBarWidthsFunc(nutrient)}}% 達成中</div>
                 <p></p><div class="remaining-amount">残り{{ remainingAmount(nutrient) }} g摂取することを目指しましょう！</div>
                 
               </div>
             </div>
           </div>
         </div>
-              <div class="ui segment"></div>
-      
-      
-      </div>
+      <div class="ui segment"></div>
+    </div>
       
         <div class="record-button">
             <button class="ui  green fluid button" @click="submit">
@@ -96,8 +102,11 @@ export default {
       weight: 0,
       age: 0,
       dailyNutrientGoals: {},
+
       
-      //data fo chart
+      progressBarWidths: {},
+      // // data fo chart
+      
       nutrients: [
         'protein',
         'vitaminD',
@@ -131,6 +140,37 @@ export default {
         'カルシウム',
         '亜鉛',
       ],
+      
+      //   nutrients: [
+      //   'タンパク質',
+      //   'ビタミンD',
+      //   'ビタミンD12',
+      //   '鉄分',
+      //   'DHA',
+      //   'EPA',
+      //   'カルシウム',
+      //   '亜鉛',
+      // ],
+      // maxValues: {
+      //   'タンパク質': 100,
+      //   'ビタミンD': 50,
+      //   'ビタミンD12': 150,
+      //   '鉄分': 130,
+      //   'DHA': 180,
+      //   'EPA': 70,
+      //   'カルシウム': 100,
+      //   '亜鉛': 100,
+      // },
+      // totalNutrients: {
+      //   'タンパク質': 12,
+      //   'ビタミンD': 34,
+      //   'ビタミンD12': 68,
+      //   '鉄分': 54,
+      //   'DHA': 70,
+      //   'EPA': 78,
+      //   'カルシウム': 70,
+      //   '亜鉛': 70,
+      // },
     }
 
   },
@@ -180,14 +220,14 @@ export default {
       this.weight = jsonData.weight;
       this.age = jsonData.age;
       this.dailyNutrientGoals = jsonData.dailyNutrientGoals;
-      console.log(`height ${this.height}`)
-      console.log(`this.sex ${this.sex}`)
-      console.log(`weight ${this.weight}`)
-      console.log(`age ${this.age}`)
-      console.log(`dailyNutrientGoals ${this.dailyNutrientGoals}`)
+
     } catch (e) {
       this.errorMsg = `Something Error occur: ${e}`
     }
+    
+    
+    
+    
   },
 
   methods: {
@@ -201,21 +241,29 @@ export default {
       window.localStorage.setItem("date", date)
     },
     
-    progressBarWidths(nutrient) {
+    progressBarWidthsFunc(nutrient) {
       const progressBarWidths = {};
-      for (const nutrient of this.nutrients) {
+      
         const intake = this.totalNutrients[nutrient];
-        const goal = this.dailyNutrientGoals[nutrient]
+        const goal = this.dailyNutrientGoals[nutrient];
         const percentage = (intake / goal) * 100;
+        
         progressBarWidths[nutrient] = Math.min(percentage, 100);
-      }
+        console.log(` ${nutrient} ${progressBarWidths[nutrient]}`)
+        // const intake = this.totalNutrients[nutrient];
+        // const maxValue = this.maxValues[nutrient];
+        // const percentage = (intake / maxValue) * 100;
+        // progressBarWidths[nutrient] = Math.min(percentage, 100);
         return progressBarWidths[nutrient];
     },
     
     remainingAmount(nutrient) {
       const intake = this.totalNutrients[nutrient];
-      const goal = this.dailyNutrientGoals[nutrient]
+      const goal = Number(this.dailyNutrientGoals[nutrient])
       const remaining = Math.max(goal - intake, 0);
+      // const intake = this.totalNutrients[nutrient];
+      // const maxValue = this.maxValues[nutrient];
+      // const remaining = Math.max(maxValue - intake, 0);
       return remaining.toFixed(2); // 小数点2桁まで表示
     },
   },
@@ -236,6 +284,14 @@ export default {
 /* このコンポーネントだけに適用するCSSはここに記述する */
 .right-align {
   text-align: right;
+}
+.tag {
+  color: black;
+  background: green;
+}
+.active-tag {
+  color: black;
+  background: gray;
 }
 .menu-container {
   display: flex;
