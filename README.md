@@ -240,6 +240,39 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 ----
+### dailyMeals関連
+#### POST `/dailyMeals`
+```
+// request
+{
+    "userId": "team3",
+    "date": 20230824,
+    "dishes": [
+        { "dishName":"チキントマト", "quantity":1 },
+        { "dishName":"オニオンサラダ", "quantity":2 }
+    ],
+    "mealType": "dinner"
+}
+```
+```
+// response
+{
+    "totalNutrients": {
+        "vitamineD": 12.37,
+        "calcium": 80,
+        "protein": 10,
+        "epa": 1,
+        "iron": 13,
+        "dha": 1,
+        "vitamineD12": 25,
+        "zinc": 20,
+        "vitamineC": 10,
+        "vitamineB": 0.27
+    }
+}
+```
+
+----
 ### ingredients関連
 #### GET `/ingredients`
 ```
