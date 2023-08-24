@@ -104,6 +104,7 @@ exports.handler = async (event, context) => {
       sex,
       age,
       height,
+      weight,
       dailyNutrientGoals,
       token: "mtiToken",
     });
