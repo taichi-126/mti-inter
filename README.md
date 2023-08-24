@@ -116,4 +116,39 @@ classDiagram
 | 登録   | GET   | 料理新規追加時に一覧を表示 |  `/ingredients`                |   | success/error, list<ingredientName> |
 
 
+### 例
+#### POST `/dishes`
+```
+// リクエストボディ
+{
+    "dishName": "塩オニオン",
+    "userId": "team3",
+    "ingredients": [
+        { "name":"onion", "weight":10 },
+        { "name":"salt", "weight":5 }
+    ]
+}
+```
+```
+// レスポンスボディ
+{
+    "dishName": "塩オニオン",
+    "userId": "team3",
+    "ingredients": [
+        {
+            "name": "onion",
+            "weight": 10
+        },
+        {
+            "name": "salt",
+            "weight": 5
+        }
+    ],
+    "nutrients": {
+        "vitamineC": 5,
+        "calcium": 12,
+        "vitamineD": 5
+    }
+}
+```
 
