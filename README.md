@@ -57,9 +57,7 @@ classDiagram
     class DailyMeals {
         +userId (PK)
         +date (SK)
-        mealType
-        dishes
-        totalNutrients
+        meals 
     }
 
     class Ingredients {
@@ -119,9 +117,26 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 |------------|----------------------------------|
 | userId     | ユーザーのID (パーティションキー)          |
 | date   | 食事の日 (ソートキー)                  |
-| mealType   | 朝食、昼食、夕食など                        |
-| dishes     | 選択された料理のリスト(料理名前や量など) [{"dishName":"パスタ", "quantity": 1}, {"dishName":"サラダ", "quantity":2}] |
-| totalNutrients| その日の全ての栄養素の合計                      |
+| meals   | 朝食、昼食、夕食ごとにdishes, totalNutrientsを管理する.                  |
+
+```
+//mealsの例
+{
+  "userId": "user1",
+  "date": "20230824",
+  "meals": {
+    "breakfast": {
+      "dishes": [{"dishName":"パスタ", "quantity":1}, {"dishName":"サラダ", "quantity":3}],
+      "nutrients": {"vitamineD":10, "calcium":10,,,,}
+    },
+    "lunch": {
+       "dishes": [],
+       "nutriens": {}
+     },
+    "dinner": {...}
+  }
+}
+```
 
 ---
 
