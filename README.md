@@ -125,7 +125,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 //mealsの例
 {
   "userId": "user1",
-  "date": "20230824",
+  "date": 20230824,
   "meals": {
     "breakfast": {
       "dishes": [{"dishName":"パスタ", "quantity":1}, {"dishName":"サラダ", "quantity":3}],
