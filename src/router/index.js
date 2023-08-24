@@ -42,6 +42,7 @@ const router = createRouter({
         title:'User'
       }
     },
+    {
       path: "/diary",
       name: "Diary",
       component: Diary,

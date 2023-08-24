@@ -98,7 +98,6 @@ export default {
     
     try {
       /* global fetch */
-      window.localStorage.setItem('userId', "team3")
       const res = await fetch(baseUrl + `/dishes?userId=${this.userId}`,{
         method: 'GET',
         headers

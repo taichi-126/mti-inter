@@ -153,7 +153,7 @@ export default {
       const path = this.isLogin? '/user/login' : '/user/signup';
       const { userId, password, sex,weight,height,age } = this.user;
       const reqBody = this.isLogin
-        ? { userId, password,sex }
+        ? { userId, password }
         : { userId, password, sex,weight,height,age };
 
       try {
@@ -172,12 +172,12 @@ export default {
           const errorMessage = jsonData.message ?? 'エラーメッセージがありません';
           throw new Error(errorMessage);
         }
-  let currentDate = new Date()
-      window.localStorage.setItem("date", currentDate)
+        let currentDate = new Date()
+        window.localStorage.setItem("date", currentDate)
         window.localStorage.setItem('token', jsonData.token);
         window.localStorage.setItem('userId', this.user.userId);
 
-        this.$router.push({ name: 'Home' });
+        this.$router.push({ name: 'Diary' });
       } catch (e) {
         console.error(e);
         this.errorMsg = e;
