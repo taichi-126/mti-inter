@@ -42,6 +42,7 @@ classDiagram
     }
 
 ```
+---
 
 #### Userテーブル
 dailyNutirientsGoalsはバックエンド側で計算して返す.
@@ -55,6 +56,21 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | height     | 身長 |
 | weight     | 体重 |
 | dailyNutrientGoals | 1日に取るべき栄養素の目標値(map) 例:{"protein":300, "dhc":100} |
+
+---
+#### nutrients(テーブルではない)
+マップ形式で返される各栄養素の名前.
+
+| 栄養素名 | 単位 |
+|---|---|
+| protein | g |
+| vitamineD | μg |
+| vitamineD12 | μg |
+| iron | mg |
+| dha | g |
+| epa | g |
+| calcium | mg |
+| zinc | mg |
 
 ---
 
