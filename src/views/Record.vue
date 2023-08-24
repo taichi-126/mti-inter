@@ -5,60 +5,48 @@
 
 <h2>今日の食材</h2>
 
-<select class="ui fluid search dropdown" multiple="">
-  <option value="">State</option>
-  <option value="AL">Alabama</option>
-  <option value="AK">Alaska</option>
-  <option value="AZ">Arizona</option>
-  <option value="AR">Arkansas</option>
-  <option value="CA">California</option>
-  <option value="CO">Colorado</option>
-  <option value="CT">Connecticut</option>
-  <option value="DE">Delaware</option>
-  <option value="DC">District Of Columbia</option>
-  <option value="FL">Florida</option>
-  <option value="GA">Georgia</option>
-  <option value="HI">Hawaii</option>
-  <option value="ID">Idaho</option>
-  <option value="IL">Illinois</option>
-  <option value="IN">Indiana</option>
-  <option value="IA">Iowa</option>
-  <option value="KS">Kansas</option>
-  <option value="KY">Kentucky</option>
-  <option value="LA">Louisiana</option>
-  <option value="ME">Maine</option>
-  <option value="MD">Maryland</option>
-  <option value="MA">Massachusetts</option>
-  <option value="MI">Michigan</option>
-  <option value="MN">Minnesota</option>
-  <option value="MS">Mississippi</option>
-  <option value="MO">Missouri</option>
-  <option value="MT">Montana</option>
-  <option value="NE">Nebraska</option>
-  <option value="NV">Nevada</option>
-  <option value="NH">New Hampshire</option>
-  <option value="NJ">New Jersey</option>
-  <option value="NM">New Mexico</option>
-  <option value="NY">New York</option>
-  <option value="NC">North Carolina</option>
-  <option value="ND">North Dakota</option>
-  <option value="OH">Ohio</option>
-  <option value="OK">Oklahoma</option>
-  <option value="OR">Oregon</option>
-  <option value="PA">Pennsylvania</option>
-  <option value="RI">Rhode Island</option>
-  <option value="SC">South Carolina</option>
-  <option value="SD">South Dakota</option>
-  <option value="TN">Tennessee</option>
-  <option value="TX">Texas</option>
-  <option value="UT">Utah</option>
-  <option value="VT">Vermont</option>
-  <option value="VA">Virginia</option>
-  <option value="WA">Washington</option>
-  <option value="WV">West Virginia</option>
-  <option value="WI">Wisconsin</option>
-  <option value="WY">Wyoming</option>
-</select>  
+<!-- loop -->
+
+ 
+  
+  <table>
+    <thead>
+      <tr>
+        <th>食事</th>
+        <th>個数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(name, quantity) in meals" >
+        <td>
+          <option v-for="dish in dishes" :value="dish">{{dish}}</option>
+        </td>
+        <td>
+          <p>年齢</p>
+        </td>
+      </tr>
+    </tbody>
+    
+  </table>
+  
+
+
+<select class="ui fluid search dropdown">
+  <!-- tabel =>
+  cssをいじる
+  
+  formを追加して, buttonをクリックしたら追加
+  
+  -->
+ 
+  
+  <template v-for="(meal, index) in meals" v-bind:key="meal.index">
+    <option v-for="dish in dishes" :value="dish">{{dish}}</option>
+    <button v-on:click="del(index)">削除</button>
+  </template>
+</select>
+
+<button v-on:click="add">行を追加</button>
 
 
 <div class="">aa</div>
@@ -79,6 +67,8 @@
 import { baseUrl } from "@/assets/config.js";
 import moment from 'moment';
 
+const headers = {'Authorization': 'mtiToken' }
+
 export default {
   name: "Diary",
 
@@ -89,7 +79,10 @@ export default {
   data() {
     // Vue.jsで使う変数はここに記述する
     return {
-
+      userId: "",
+      dishes: [],
+      
+      meals: [{ name: "", quantity: 0 }],
     }
 
   },
@@ -101,13 +94,70 @@ export default {
   created: async function () {
     // Vue.jsの読み込みが完了したときに実行する処理はここに記述する
     // apiからarticleを取得する
-
+    this.userId = window.localStorage.getItem("userId");
+    
+    try {
+      /* global fetch */
+      window.localStorage.setItem('userId', "team3")
+      const res = await fetch(baseUrl + `/dishes?userId=${this.userId}`,{
+        method: 'GET',
+        headers
+      });
+      
+      const text = await res.text();
+      const jsonData = text ? JSON.parse(text) : {}
+      
+      if (!res.ok) {
+        const errorMessage = jsonData.message ?? 'エラーメッセージがありません';
+        throw new Error(errorMessage);
+      }
+      
+      this.dishes = jsonData.dishes;
+      console.log(this.dishes);
+      
+    } catch (e) {
+      this.errorMsg = `Something Error occur: ${e}`
+    }
   },
 
   methods: {
     // Vue.jsで使う関数はここで記述する
     async record() {
-      this.$router.push({ name: "Diary"})
+      
+      const reqBody = {
+        
+      }
+      
+      try {
+        let path = "/daily-meals";
+        /* global fetch */
+        const res = await fetch(baseUrl + path, {
+          method: "POST",
+          body: JSON.stringify(reqBody)
+        });
+        
+        const text = await res.text();
+        const jsonData = text ? JSON.parse(text) : {}
+
+        // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
+        if (!res.ok) {
+          const errorMessage = jsonData.message ?? 'エラーメッセージがありません';
+          throw new Error(errorMessage);
+        }
+        
+        this.$router.push({ name: "Diary"})
+      } catch(e) {
+        console.error(e);
+        this.errorMsg = e;
+      }  
+      
+    },
+    
+    add() {
+      this.meals.push({ name: "", quantity: 0 });
+    },
+    del(index) {
+      this.meals.splice(index, 1)
     }
   },
   
