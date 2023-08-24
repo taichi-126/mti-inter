@@ -9,9 +9,10 @@
       - [DailyMealsTable](#dailymealstable)
       - [Ingredientsテーブル](#ingredientsテーブル)
     - [Web REST API 設計](#web-rest-api-設計)
-      - [DishesテーブルのAPI](#dishesテーブルのapi)
-      - [DailyMealsTableのAPI](#dailymealstableのapi)
-      - [IngredientsTableのAPI](#ingredientstableのapi)
+      - [Userテーブルに関するAPI](#userテーブルに関するapi)
+      - [Dishesテーブルに関するAPI](#dishesテーブルに関するapi)
+      - [DailyMealsTableに関するAPI](#dailymealstableに関するapi)
+      - [IngredientsTableに関するAPI](#ingredientstableに関するapi)
     - [API動作例](#api動作例)
       - [User関連](#user関連)
         - [POST `/user/signup`](#post-usersignup)
@@ -154,7 +155,9 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 
 ### Web REST API 設計
 
-#### DishesテーブルのAPI
+#### Userテーブルに関するAPI
+
+#### Dishesテーブルに関するAPI
 
 | 操作   | Method | 処理の内容 | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
 |--------|----|----|--------------------|-----------------------------------------------|------------------------------|
@@ -162,7 +165,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | 取得   | GET    | ユーザーがすでに登録した料理の一覧を表示. | `/dishes？userId` | userId                                             | List<dishName> |
 | 削除   | DELETE | ユーザーがすでに登録した料理を削除. | `/dishes?dishName&userId` | dishName, userId                                             | success/error                  |
 
-#### DailyMealsTableのAPI
+#### DailyMealsTableに関するAPI
 
 | 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
 |--------|-------|--|-------------------------------|----------------------------------|--------------------------|
@@ -171,7 +174,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | 取得   | GET   |  その日の指定した食事の情報を取得. | `/daily-meals?userId&date?mealType`                | userId, date, mealType  | success/error, dishes, nutrients |
 | 取得   | GET   |  その日の摂取した栄養素の合計取得. | `/daily-meals/total?userId&date`                | userId, date,   | success/error, TotalNutrients |
 
-#### IngredientsTableのAPI
+#### IngredientsTableに関するAPI
 
 | 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
 |--------|------|--|-------------------------------|----------------------------------|--------------------------|
