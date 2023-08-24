@@ -173,33 +173,32 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 // リクエストボディ
 {
-    "dishName": "塩オニオン",
+    "dishName": "チキントマト",
     "userId": "team3",
     "ingredients": [
-        { "name":"onion", "weight":10 },
-        { "name":"salt", "weight":5 }
+        { "name":"tomato", "weight":100 },
+        { "name":"chicken", "weight":100 }
     ]
 }
 ```
 ```
 // レスポンスボディ
 {
-    "dishName": "塩オニオン",
+    "dishName": "チキントマト",
     "userId": "team3",
     "ingredients": [
-        {
-            "name": "onion",
-            "weight": 10
-        },
-        {
-            "name": "salt",
-            "weight": 5
-        }
+        { "name": "tomato", "weight": 100},
+        { "name": "chicken", "weight": 100}
     ],
     "nutrients": {
-        "vitamineC": 5,
-        "calcium": 12,
-        "vitamineD": 5
+        "vitamineD": 12,
+        "calcium": 60,
+        "protein": 10,
+        "epa": 1,
+        "iron": 13,
+        "dha": 1,
+        "vitamineD12": 25,
+        "zinc": 20
     }
 }
 ```
@@ -212,6 +211,20 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
     "dishes": [
         "塩オニオン",
         "オニオンサラダ"
+    ]
+}
+```
+
+#### GET `/ingredients`
+```
+// ingredientsのName一覧がリストで返ってくる
+{
+    "ingredients": [
+        "onion",
+        "chicken",
+        "lettuce",
+        "salt",
+        "tomato"
     ]
 }
 ```
