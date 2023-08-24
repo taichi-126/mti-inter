@@ -211,6 +211,9 @@ export default {
       window.localStorage.clear();
       this.$router.push({ name: "Login" });
     }
+
+    this.$router.push({name: "Diary"})
+
   },
 
   methods: {
