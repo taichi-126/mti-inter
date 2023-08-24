@@ -135,7 +135,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | 登録   | GET   | 料理新規追加時に一覧を表示 |  `/ingredients`                |   | success/error, list<ingredientName> |
 
 
-### 例
+## API動作例
+### User関連
 #### POST `/user/signup`
 ```
 //リクエスト
@@ -190,7 +191,9 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
     },
 }
 ```
+----
 
+### dishes関連
 #### POST `/dishes`
 ```
 // リクエストボディ
@@ -236,7 +239,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
     ]
 }
 ```
-
+----
+### ingredients関連
 #### GET `/ingredients`
 ```
 // ingredientsのName一覧がリストで返ってくる
