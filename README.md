@@ -28,7 +28,7 @@ classDiagram
         nutrients
     }
 
-    class DailyMealsTable {
+    class DailyMeals {
         +userId (PK)
         +date (SK)
         mealType
