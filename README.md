@@ -185,7 +185,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 
 | 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
 |--------|------|--|-------------------------------|----------------------------------|--------------------------|
-| 登録   | GET   | 料理新規追加時に一覧を表示 |  `/ingredients`                |   | success/error, list<ingredientName> |
+| 取得   | GET   | 料理新規追加時に一覧を表示 |  `/ingredients`                |   | success/error, list<ingredientName> |
+| 登録 | POST | 新たな原材料を追加 | `/ingredients` | ingredientName, nutrients | success/error |
 
 
 ### API動作例
