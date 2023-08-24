@@ -112,7 +112,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 
 ### Web REST API 設計
 
-### DishesテーブルのAPI
+#### DishesテーブルのAPI
 
 | 操作   | Method | 処理の内容 | Endpoint           | リクエストパラメータ                            | レスポンス内容                  |
 |--------|----|----|--------------------|-----------------------------------------------|------------------------------|
@@ -120,7 +120,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | 取得   | GET    | ユーザーがすでに登録した料理の一覧を表示. | `/dishes？userId` | userId                                             | List<dishName> |
 | 削除   | DELETE | ユーザーがすでに登録した料理を削除. | `/dishes?dishName&userId` | dishName, userId                                             | success/error                  |
 
-### DailyMealsTableのAPI
+#### DailyMealsTableのAPI
 
 | 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
 |--------|-------|--|-------------------------------|----------------------------------|--------------------------|
@@ -128,16 +128,16 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | 変更   | PUT   |  一度,保存した食事内容を変更. | `/daily-meals`                | UserId, Date, MealType, Dishes   | success/error, TotalNutrients |
 | 取得   | GET   |  その日の合計栄養値を取得. | `/daily-meals?userId&date`                | userId, date  | success/error, TotalNutrients |
 
-### IngredientsTableのAPI
+#### IngredientsTableのAPI
 
 | 操作   | Method | 処理の内容 | Endpoint                      | リクエストパラメータ               | レスポンス内容              |
 |--------|------|--|-------------------------------|----------------------------------|--------------------------|
 | 登録   | GET   | 料理新規追加時に一覧を表示 |  `/ingredients`                |   | success/error, list<ingredientName> |
 
 
-## API動作例
-### User関連
-#### POST `/user/signup`
+### API動作例
+#### User関連
+##### POST `/user/signup`
 ```
 //リクエスト
 {
@@ -170,7 +170,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 
-#### GET `/user`
+##### GET `/user`
 ```
 // GET /user?userId ユーザーIDを指定してユーザー情報を取得.
 {
@@ -193,8 +193,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 ----
 
-### dishes関連
-#### POST `/dishes`
+#### dishes関連
+##### POST `/dishes`
 ```
 // リクエストボディ
 {
@@ -228,7 +228,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 
-#### GET `/dishes`
+##### GET `/dishes`
 ```
 // /dishes?userId=team3
 // レスポンスはdishNameがリストになって返ってくる.
@@ -240,8 +240,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 ----
-### dailyMeals関連
-#### POST `/dailyMeals`
+#### dailyMeals関連
+##### POST `/dailyMeals`
 ```
 // request
 {
@@ -270,7 +270,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 
-#### GET `/daily-meals`
+##### GET `/daily-meals`
 ```
 //userIdとdateを投げて,response
 {
@@ -300,8 +300,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 
 ----
-### ingredients関連
-#### GET `/ingredients`
+#### ingredients関連
+##### GET `/ingredients`
 ```
 // ingredientsのName一覧がリストで返ってくる
 {
