@@ -23,7 +23,7 @@
         - [POST `/daily-meals`](#post-daily-meals)
         - [PUT `/daily-meals`](#put-daily-meals)
         - [GET `/daily-meals`](#get-daily-meals)
-        - [GET `/daily-meals/total`](#get-daily-meals/total)
+        - [GET `/daily-meals/total`](#get-daily-meals-total)
       - [ingredients関連](#ingredients関連)
         - [GET `/ingredients`](#get-ingredients)
 
