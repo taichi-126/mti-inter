@@ -21,8 +21,9 @@
         - [GET `/dishes`](#get-dishes)
       - [dailyMeals関連](#dailymeals関連)
         - [POST `/daily-meals`](#post-daily-meals)
-        - [GET `/daily-meals`](#get-daily-meals)
         - [PUT `/daily-meals`](#put-daily-meals)
+        - [GET `/daily-meals`](#get-daily-meals)
+        - [GET `/daily-meals/total`](#get-daily-meals/total)
       - [ingredients関連](#ingredients関連)
         - [GET `/ingredients`](#get-ingredients)
 
@@ -312,35 +313,6 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 
-##### GET `/daily-meals`
-```
-//userIdとdateを投げて,response
-{
-    "userId": "team3",
-    "date": 20230824,
-    "dishes": [
-        {
-            "dishName": "チキントマト",
-            "quantity": 1
-        },
-        {
-            "dishName": "オニオンサラダ",
-            "quantity": 2
-        }
-    ],
-    "totalNutrients": {
-        "vitamineD": 12.37,
-        "calcium": 80,
-        "protein": 10,
-        "epa": 1,
-        "iron": 13,
-        "dha": 1,
-        "vitamineD12": 25,
-        "zinc": 20
-    }
-}
-```
-
 ##### PUT `/daily-meals`
 優先度低め. ユーザーは食べた食事の料理を変更できる. 
 ```
@@ -367,6 +339,52 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
         "dha": 1,
         "vitamineD12": 25,
         "zinc": 20
+    }
+}
+```
+
+##### GET `/daily-meals`
+```
+//userIdとdate, mealTypeを投げて,response
+{
+    "userId": "team3",
+    "date": 20230824,
+    "dishes": [
+        {
+            "dishName": "チキントマト",
+            "quantity": 1
+        },
+        {
+            "dishName": "オニオンサラダ",
+            "quantity": 2
+        }
+    ],
+    "nutrients": {
+        "vitamineD": 12.37,
+        "calcium": 80,
+        "protein": 10,
+        "epa": 1,
+        "iron": 13,
+        "dha": 1,
+        "vitamineD12": 25,
+        "zinc": 20
+    }
+}
+```
+
+##### GET `daily-meals/total`
+```
+//userIdとdateを渡すとその日の合計摂取栄養値が返ってくる.
+{
+    "totalNutrients": {
+        "vitamineD": 37.11,
+        "calcium": 240,
+        "protein": 30,
+        "epa": 3,
+        "iron": 39,
+        "dha": 3,
+        "vitamineD12": 75,
+        "zinc": 60
     }
 }
 ```
