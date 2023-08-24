@@ -169,6 +169,28 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 }
 ```
 
+#### GET `/user`
+```
+// GET /user?userId ユーザーIDを指定してユーザー情報を取得.
+{
+    "userId": "nick",
+    "height": 180,
+    "sex": "male",
+    "weight": 70,
+    "age": 66,
+    "dailyNutrientGoals": {
+        "calcium": 800,
+        "protein": 84,
+        "vitaminD": 8.5,
+        "epa": 2,
+        "iron": 8,
+        "vitaminB12": 2.4,
+        "dha": 11,
+        "zinc": 11
+    },
+}
+```
+
 #### POST `/dishes`
 ```
 // リクエストボディ
