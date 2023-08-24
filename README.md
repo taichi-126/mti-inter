@@ -265,9 +265,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
         "iron": 13,
         "dha": 1,
         "vitamineD12": 25,
-        "zinc": 20,
-        "vitamineC": 10,
-        "vitamineB": 0.27
+        "zinc": 20
     }
 }
 ```
