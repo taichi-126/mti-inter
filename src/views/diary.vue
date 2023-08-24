@@ -155,6 +155,8 @@
 // @は/srcと同じ意味です
 // import something from '@/components/something.vue';
 import { baseUrl } from "@/assets/config.js";
+import moment from "moment";
+moment.locale("ja")
 
 const headers = { Authorization: "mtiToken" };
 
@@ -163,6 +165,7 @@ export default {
 
   components: {
     // 読み込んだコンポーネント名をここに記述する
+    
   },
 
   data() {
