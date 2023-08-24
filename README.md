@@ -60,7 +60,7 @@ classDiagram
 | dishName       | 料理の名前 (パーティションキー)                               |
 | userId       | ユーザーID (ソートキー)                                   |
 | ingredients  | 原材料をマップ形式で重量と保存. [{"name": "tomato", "weight":100}, ]                          |
-| nutrients    | 原材料から計算された栄養成分情報                             |
+| nutrients    | 原材料から計算された栄養成分情報 {"vitamine":100, "protein": 200}                             |
 
 ---
 
