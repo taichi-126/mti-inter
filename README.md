@@ -299,7 +299,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 ```
 // response
 {
-    "totalNutrients": {
+    "nutrients": {
         "vitamineD": 12.37,
         "calcium": 80,
         "protein": 10,
