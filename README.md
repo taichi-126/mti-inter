@@ -132,7 +132,7 @@ classDiagram
 ```
 // response
 {
-    "userId": "hagimoto-k",
+    "userId": "team3",
     "sex": "male",
     "age": 66,
     "height": 180,
