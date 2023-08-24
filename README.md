@@ -15,6 +15,7 @@ classDiagram
         +userId (PK)
         password
         age
+        sex
         height
 　　　　　　　　　　　　　　　　weight
     }
@@ -48,7 +49,9 @@ classDiagram
 | userId  | ユーザーID (パーティションキー) |
 | password | パスワード   |
 | age     | 年齢       |
+| sex | 性別 |
 | height     | 身長 |
+| weight     | 体重 |
 
 ---
 
