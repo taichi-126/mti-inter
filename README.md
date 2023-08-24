@@ -99,7 +99,7 @@ classDiagram
 |--------|----|----|--------------------|-----------------------------------------------|------------------------------|
 | 登録   | POST   | 新しい料理を追加. | `/dishes`          | userId, dishName, ingredients                 | success/error, dishName        |
 | 取得   | GET    | ユーザーがすでに登録した料理の一覧を表示. | `/dishes？userId` | userId                                             | List<dishName> |
-| 削除   | DELETE | ユーザーがすでに登録した料理を削除. | `/dishes?dishId&userId` | dishId, userId                                             | success/error                  |
+| 削除   | DELETE | ユーザーがすでに登録した料理を削除. | `/dishes?dishName&userId` | dishName, userId                                             | success/error                  |
 
 ### DailyMealsTableのAPI
 
