@@ -23,7 +23,7 @@
         </td>
         <td>
           <div v-if="quantityFlags[index]">
-            <input  v-model.number="quantity"  type="number" min="1" placeholder="Age" v-on:change="selectQuantity(index)" />
+            <input  v-model.number="quantitys[index]"  type="number" min="1" placeholder="Age" v-on:change="selectQuantity(index)" />
           </div>
         </td>
       </tr>
@@ -74,8 +74,9 @@ export default {
       
       tableCol: [{key: ""}],
       meals: [],
-      
-      quantityFlags: []
+      quantitys: [0,0,],
+      quantityFlags: [],
+      index: 1,
       
     }
 
@@ -124,6 +125,7 @@ export default {
       const dishes = this.meals;
       // ページ遷移で持ってくる
       const mealType = "dinner"
+      console.log(this.meals)
       
       const reqBody = {
         userId, date, dishes, mealType
@@ -149,6 +151,7 @@ export default {
           throw new Error(errorMessage);
         }
         
+        
         this.$router.push({ name: "Diary"})
       } catch(e) {
         console.error(e);
@@ -158,7 +161,11 @@ export default {
     },
     
     add() {
+      this.index += 1
       this.tableCol.push({ name: "", quantity: 0 });
+      if (this.quantitys.length < this.index+1) {
+        this.quantitys.push(0)
+      };
     },
     del() {
       this.tableCol.pop()
@@ -170,7 +177,7 @@ export default {
     },
     
     selectQuantity(index) {
-      this.meals[index]["quantity"] = this.quantity
+      this.meals[index]["quantity"] = this.quantitys[index]
     }
     
   },
