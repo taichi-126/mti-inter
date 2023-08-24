@@ -4,8 +4,9 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Profile from '../views/Profile.vue';
 import User from '../views/User.vue';
-import Diary from '../views/Diary.vue'
+import Diary from '../views/Diary.vue';
 import Record from '../views/Record.vue';
+import FoodRecord from '../views/FoodRecord.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,14 @@ const router = createRouter({
       component: Record,
       meta: {
         title: "Record"
+      }
+    },
+    {
+      path: "/foodRecord",
+      name: "FoodRecord",
+      component: FoodRecord,
+      meta: {
+        title: "FoodRecord"
       }
     }
   ]

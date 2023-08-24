@@ -3,24 +3,25 @@
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
 
-<h2>今日の食材</h2>
+<h2>食品名</h2>
+<h2>{{ newMeal }}</h2>
   <table>
     <thead>
       <tr>
         <th>食事</th>
-        <th>個数</th>
+        <th>重さ(g)</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(key, index) in tableCol" :key="index">
         <td>
-          <select class="ui fluid search dropdown" v-on:change="selectDish">
-            <option v-for="dish in dishes" :value="dish">{{dish}}</option>
+          <select class="ui fluid search dropdown" v-on:change="selectIngredient">
+            <option v-for="ingredient in ingredients" :value="ingredient">{{ingredient}}</option>
           </select>
         </td>
         <td>
           <div v-if="quantityFlags[index]">
-            <input  v-model.number="quantitys[index]"  type="number" min="1" placeholder="Age" v-on:change="selectQuantity(index)" />
+            <input  v-model.number="quantitys[index]"  type="number" min="30" placeholder="重さ" v-on:change="selectQuantity(index)" />
           </div>
         </td>
       </tr>
@@ -35,26 +36,12 @@
 
 <div class="container"></div>
 
-<div class="meal segment">
-  <center>
-    <input type="text" placeholder="食品名" v-model.text="newMeal"/>    
-  </center>
-  
-<div class="container"></div>
-  
-  
-</div>
-  <div class="record-button">
-      <button class="ui  green fluid button" @click="foodRecord">
-        <i class="plus icon"></i>
-        <p>食品を追加する</p>
-      </button>
-  </div>
-  <div class="container"></div>
+ 
+ 
   <div class="record-button">
       <button class="ui  green fluid button" @click="record">
         <i class="arrow alternate circle right icon"></i>
-        <p>記録する</p>
+        <p>材料を記録する</p>
       </button>
   </div>
     
@@ -72,7 +59,7 @@ import moment from 'moment';
 const headers = {'Authorization': 'mtiToken' }
 
 export default {
-  name: "FoodRecord",
+  name: "Diary",
 
   components: {
     // 読み込んだコンポーネント名をここに記述する
@@ -85,16 +72,16 @@ export default {
       dishes: [],
       date: "",
       
-      quantity: 1,
+      ingredients: [],
       
       tableCol: [{key: ""}],
-      meals: [],
+      pointedIngredients: [],
       quantitys: [0,0,],
       quantityFlags: [],
       index: 1,
       
-      // new meal name
       newMeal: "",
+      
     }
 
   },
@@ -108,9 +95,10 @@ export default {
     // apiからarticleを取得する
     this.userId = window.localStorage.getItem("userId");
     this.date = window.localStorage.getItem("date");
+    this.newMeal = window.localStorage.getItem("newMeal")
     try {
       /* global fetch */
-      const res = await fetch(baseUrl + `/dishes?userId=${this.userId}`,{
+      const res = await fetch(baseUrl + `/ingredients`,{
         method: 'GET',
         headers
       });
@@ -123,8 +111,8 @@ export default {
         throw new Error(errorMessage);
       }
       
-      this.dishes = jsonData.dishes;
-      console.log(this.dishes);
+      this.ingredients = jsonData.ingredients;
+      console.log(this.ingredients);
       
     } catch (e) {
       this.errorMsg = `Something Error occur: ${e}`
@@ -138,19 +126,17 @@ export default {
       const userId = this.userId;
       // const date = this.date
       //dateの変換
-      const date = 20230824
-      const dishes = this.meals;
+    
+      const ingredients = this.pointedIngredients;
       // ページ遷移で持ってくる
-      const mealType = "dinner"
-      console.log(this.meals)
-      
+      const dishName = this.newMeal;
       const reqBody = {
-        userId, date, dishes, mealType
+        dishName, userId,  ingredients, 
       }
       console.log(reqBody)
       
       try {
-        let path = "/daily-meals";
+        let path = "/dishes";
         /* global fetch */
         const res = await fetch(baseUrl + path, {
           method: "POST",
@@ -168,7 +154,9 @@ export default {
           throw new Error(errorMessage);
         }
         
-        this.$router.push({ name: "Diary"})
+        console.log(jsonData.ingredients)
+        console.log(jsonData.nutrients)
+        // this.$router.push({ name: "Diary"})
       } catch(e) {
         console.error(e);
         this.errorMsg = e;
@@ -176,14 +164,9 @@ export default {
       
     },
     
-    foodRecord() {
-      window.localStorage.setItem("newMeal", this.newMeal)
-      this.$router.push({ name : "FoodRecord" })
-    },
-    
     add() {
       this.index += 1
-      this.tableCol.push({ name: "", quantity: 0 });
+      this.tableCol.push({ key: "",});
       if (this.quantitys.length < this.index+1) {
         this.quantitys.push(0)
       };
@@ -192,13 +175,13 @@ export default {
       this.tableCol.pop()
     },
     
-    selectDish(dish) {
-      this.meals.push({ dishName: dish.target.value, quantity: 1 });
+    selectIngredient(ingredient) {
+      this.pointedIngredients.push({ name: ingredient.target.value, weight: 1 });
       this.quantityFlags.push(true);
     },
     
     selectQuantity(index) {
-      this.meals[index]["quantity"] = this.quantitys[index]
+      this.pointedIngredients[index]["weight"] = this.quantitys[index]
     }
     
   },
@@ -232,8 +215,5 @@ export default {
 }
 .container {
   height: 100px;
-}
-.food-input {
-  text-align: center;
 }
 </style>
