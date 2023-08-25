@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
   }
 
   const userId = event.queryStringParameters?.userId;
-　const date = parseInt(event.queryStringParameters?.date); // 文字列を数値に変換
+  const date = parseInt(event.queryStringParameters?.date); // 文字列を数値に変換
 
   if (!userId || !date ) {
     response.statusCode = 400;

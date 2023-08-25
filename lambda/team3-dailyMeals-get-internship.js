@@ -22,8 +22,8 @@ exports.handler = async (event, context) => {
   }
 
   const userId = event.queryStringParameters?.userId;
-　const date = parseInt(event.queryStringParameters?.date); // 文字列を数値に変換
-　const mealType = event.queryStringParameters?.mealType;
+  const date = parseInt(event.queryStringParameters?.date); // 文字列を数値に変換 
+  const mealType = event.queryStringParameters?.mealType;
 
   if (!userId || !date || !mealType) {
     response.statusCode = 400;
