@@ -270,4 +270,7 @@ table {
   margin-top: 30px;
   
 }
+h2 {
+  padding-top: 30px;  
+}
 </style>

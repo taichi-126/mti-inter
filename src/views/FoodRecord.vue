@@ -3,7 +3,8 @@
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
 
-<h2>食品名</h2>
+<div class="main-content">
+  <h2>食品名</h2>
 <h2>{{ newMeal }}</h2>
   <table>
     <thead>
@@ -30,9 +31,12 @@
   </table>
   
 
+<div class="button-seg">
+<button v-on:click="add" class="add-button">行を追加</button>
+<button v-on:click="del" class="del-buton">削除</button>  
+</div>
+</div>
 
-<button v-on:click="add">行を追加</button>
-<button v-on:click="del">削除</button>
 
 <div class="container"></div>
 
@@ -156,7 +160,7 @@ export default {
         
         console.log(jsonData.ingredients)
         console.log(jsonData.nutrients)
-        // this.$router.push({ name: "Diary"})
+        this.$router.push({ name: "Record"})
       } catch(e) {
         console.error(e);
         this.errorMsg = e;
@@ -215,5 +219,35 @@ export default {
 }
 .container {
   height: 100px;
+}
+.main-content {
+  background-color: rgba(127,255,0, 0.4);
+  text-align:center;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.sub-content {
+  background-color: rgba(	192,192,192, 0.5);
+}
+.record-button {
+  margin-top: 30px;
+}
+.add-button {
+  margin-right: 40px;
+  margin-bottom: 40px;
+  width: 100px;
+}
+.del-button {
+  width: 100px;
+  margin-bottom: 40px;
+}
+.button-seg {
+  margin-top: 30px;
+  
+}
+h2 {
+  padding-top: 30px;  
 }
 </style>

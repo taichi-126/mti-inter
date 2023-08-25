@@ -14,10 +14,6 @@
         </div>
       
       
-    <div class="content">
-      
-    </div>
-      
       <div class="ui grid">
     <div class="eight column row">
       <template v-for="(day, index) in days" :key="index">
@@ -40,7 +36,16 @@
     </div>
     
       
+      
     <div class="content">
+    </div>
+    
+    <div class="advice-seg">
+      !!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;健康への一言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;！！<br>
+      タンパク質が不足しています！！😢<br>
+      あなたは、豆腐ハンバーグを食べよう！！！
+      <br>
+      
     </div>
     
     <div class="chart-seqment">
@@ -376,5 +381,9 @@ export default {
   /*background-color: lightblue; */
   padding: 10px; 
 }
-
+.advice-seg{
+ text-align:center;
+ background-color: lightgreen;
+ margin-bottom: 50px;
+}
 </style>
