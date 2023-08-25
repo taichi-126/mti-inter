@@ -2,7 +2,10 @@
   <div>
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
-
+      <button class="circular ui icon button" onclick="location.href=''">
+  <i class="left chevron icon"></i>
+</button>
+<div class="contents">
 <h2>今日の食材</h2>
   <table>
     <thead>
@@ -41,7 +44,7 @@
   </center>
   
 <div class="container"></div>
-  
+  </div>
   
 </div>
   <div class="record-button">
@@ -235,5 +238,15 @@ export default {
 }
 .food-input {
   text-align: center;
+}
+.contents{
+  text-align:center;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+button{
+  margin-top:30px;
 }
 </style>
