@@ -49,6 +49,7 @@ exports.handler = async (event, context) => {
     }
 
     delete user.password;
+    delete user.salt;
     response.body = JSON.stringify(unmarshall(user));
   } catch (e) {
     if (e.message == "指定されたuserIdを持つuserは見つかりません") {

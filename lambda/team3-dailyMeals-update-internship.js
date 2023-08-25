@@ -60,7 +60,7 @@ exports.handler = async (event, context) => {
           // 重さに基づいて栄養を計算
           let calculatedValue = dishNutrients[nutrient] * quantity;
           // 小数点第3位で四捨五入
-        　calculatedValue = Math.round(calculatedValue * 1000) / 1000;
+          calculatedValue = Math.round(calculatedValue * 1000) / 1000;
     
           mealNutrients[nutrient] += calculatedValue;
         }
@@ -101,7 +101,7 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 500,
-      headers: {　"Access-Control-Allow-Origin": "*",},
+      headers: { "Access-Control-Allow-Origin": "*",},
       body: JSON.stringify({
         message: "存在するデータの取得中にエラーが発生しました。",
         errorDetail: error.toString(),
@@ -128,9 +128,9 @@ exports.handler = async (event, context) => {
   const command = new PutItemCommand(param);
 
   try {
-  　await client.send(command);
+    await client.send(command);
     response.statusCode = 200;
-　　response.body = JSON.stringify({
+    response.body = JSON.stringify({
       "nutrients": mealNutrients,
     });
   } catch (e) {

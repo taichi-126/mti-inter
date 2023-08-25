@@ -1,5 +1,6 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall } = require("@aws-sdk/util-dynamodb");
+const crypto = require('crypto'); 
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 const TableName = "team3_user";
 
@@ -65,6 +66,10 @@ exports.handler = async (event, context) => {
   
   const { userId, password, sex, age, height, weight } = body;
   
+  //passwordをハッシュ化
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+
   //１日の目標栄養素を表示.
   let dailyNutrientGoals;
   try{
@@ -82,7 +87,8 @@ exports.handler = async (event, context) => {
     TableName,
     "Item" : marshall({
       userId,
-      password,
+      password: hash,
+      salt,
       sex,
       age,
       height,
