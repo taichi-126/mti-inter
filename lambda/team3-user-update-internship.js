@@ -1,5 +1,6 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall } = require("@aws-sdk/util-dynamodb");
+const crypto = require('crypto');
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 const TableName = "team3_user";
 
@@ -46,13 +47,18 @@ exports.handler = async (event, context) => {
       errorDetail: e.toString(),
     });
   }
+  
+  //passwordをハッシュ化
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
 
   // TODO: DBに登録するための情報をparamオブジェクトとして宣言する（中身を記述）
   const param = {
     TableName,
     "Item" : marshall({
       userId,
-      password,
+      password: hash,
+      salt,
       sex,
       age,
       height,

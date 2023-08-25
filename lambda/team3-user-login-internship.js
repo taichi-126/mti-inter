@@ -1,5 +1,6 @@
 const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
-const { marshall } = require("@aws-sdk/util-dynamodb");
+const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
+const crypto = require('crypto');
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 const TableName = "team3_user";
 
@@ -27,21 +28,26 @@ exports.handler = async (event, context) => {
     TableName,
     //キー、インデックスによる検索の定義
     KeyConditionExpression: "userId = :uid",
-    //プライマリーキー以外の属性でのフィルタ
-    FilterExpression: "password = :pkey",
     //検索値のプレースホルダの定義
     ExpressionAttributeValues: marshall({
       ":uid": body.userId,
-      ":pkey": body.password,
     }),
   };
 
   const command = new QueryCommand(param);
   try {
-    const foundCount = (await client.send(command)).Count;
-    if (foundCount == 0) {
+    const data = await client.send(command);
+    if (data.Count == 0) {
       throw new Error("userIdまたはpasswordが一致しません");
     }
+    
+    const user = unmarshall(data.Items[0]);
+    const hash = crypto.pbkdf2Sync(body.password, user.salt, 1000, 64, 'sha512').toString('hex');
+    
+    if (user.password !== hash){
+      throw new Error("userIdまたはpasswordが一致しません")
+    } 
+    
     response.body = JSON.stringify({ token: "mtiToken" });
   } catch (e) {
     if (e.message == "userIdまたはpasswordが一致しません") {
