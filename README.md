@@ -49,6 +49,7 @@ classDiagram
     class User {
         +userId (PK)
         password
+        salt
         age
         sex
         height
@@ -90,7 +91,8 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | カラム名  | 説明       |
 |---------|-----------|
 | userId  | ユーザーID (パーティションキー) |
-| password | パスワード   |
+| password | ハッシュ化したパスワード   |
+| salt | ソルト |
 | age     | 年齢       |
 | sex | 性別 |
 | height     | 身長 |
