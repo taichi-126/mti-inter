@@ -22,15 +22,15 @@
     <div class="eight column row">
       <template v-for="(day, index) in days" :key="index">
           <div class="column">
-            <div class="tag" v-if="index==4">
+            <div class="active-tag" v-if="index==4">
               <center>
-                <a href="/" @click="setDate(day)">{{ day.format("D") }}</a>
+                <a href="/" @click="setDate(day)" class="active-atag">{{ day.format("D") }}</a>
               </center>              
             </div>
             
-            <div class="active-tag" v-if="index!==4">
+            <div class="tag" v-if="index!==4">
               <center>
-                <a href="/" @click="setDate(day)">{{ day.format("D") }}</a>
+                <a href="/" @click="setDate(day)" class="atag">{{ day.format("D") }}</a>
               </center>              
             </div>
             
@@ -174,6 +174,9 @@ export default {
         'カルシウム': 70,
         '亜鉛': 70,
       },
+      totalNutrientsAPI: {
+        
+      }
     }
 
   },
@@ -229,7 +232,44 @@ export default {
     }
     
     
-    
+    // Get daily nutrition
+    try {
+      /* global fetch */
+      // ${Date.parse(this.date)}
+      const res = await fetch(baseUrl + `/daily-meals/total?userId=${this.userId}&date=20230823`,{
+        method: 'GET',
+        headers
+      });
+      
+      const text = await res.text();
+      const jsonData = text ? JSON.parse(text) : {}
+      
+      if (!res.ok) {
+        const errorMessage = jsonData.message ?? 'エラーメッセージがありません';
+        throw new Error(errorMessage);
+      }
+      
+      
+      this.totalNutrientsAPI = jsonData.totalNutrients;
+      console.log(this.totalNutrientsAPI)
+      
+    } catch (e) {
+      if(e.message == "指定されたuserIdを持つ食事記録は見つかりません") {
+        this.totalNutrientsAPI = {
+        'タンパク質': 0,
+        'ビタミンD': 0,
+        'ビタミンD12': 0,
+        '鉄分': 0,
+        'DHA': 0,
+        'EPA': 0,
+        'カルシウム': 0,
+        '亜鉛': 0,
+        }
+      }
+      
+      
+      this.errorMsg = `Something Error occur: ${e}`
+    }
     
   },
 
@@ -294,12 +334,19 @@ export default {
   text-align: right;
 }
 .tag {
-  color: black;
-  background: green;
+  background: grey;
+  height: 30px;
 }
-.active-tag {
+.atag {
   color: black;
-  background: gray;
+}
+.active-atag {
+  color: white;
+}
+
+.active-tag {
+  background: lightgreen;
+  height: 30px;
 }
 .menu-container {
   display: flex;
@@ -328,4 +375,5 @@ export default {
   /*background-color: lightblue; */
   padding: 10px; 
 }
+
 </style>
