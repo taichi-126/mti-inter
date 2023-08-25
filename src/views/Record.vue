@@ -3,11 +3,12 @@
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
 
-<h2>今日の食材</h2>
+<div class="main-content">
+  <h2>今日の食事</h2>
   <table>
     <thead>
       <tr>
-        <th>食事</th>
+        <th>内容</th>
         <th>個数</th>
       </tr>
     </thead>
@@ -27,21 +28,23 @@
     </tbody>
     
   </table>
-  
+
+<div class="button-seg">
+<button v-on:click="add" class="add-button">行を追加</button>
+<button v-on:click="del" class="del-button">削除</button>  
+</div>
+
+</div>
+
+<div class="container2"></div>
 
 
-<button v-on:click="add">行を追加</button>
-<button v-on:click="del">削除</button>
-
-<div class="container"></div>
-
-<div class="meal segment">
+<div class="sub-content">
+  <div class="container2"></div>
+  <div class="meal segment">
   <center>
     <input type="text" placeholder="食品名" v-model.text="newMeal"/>    
   </center>
-  
-<div class="container"></div>
-  
   
 </div>
   <div class="record-button">
@@ -50,6 +53,7 @@
         <p>食品を追加する</p>
       </button>
   </div>
+</div>
   <div class="container"></div>
   <div class="record-button">
       <button class="ui  green fluid button" @click="record">
@@ -235,5 +239,35 @@ export default {
 }
 .food-input {
   text-align: center;
+}
+.container2 {
+  height: 50px;
+}
+.main-content {
+  background-color: rgba(127,255,0, 0.4);
+  text-align:center;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.sub-content {
+  background-color: rgba(	192,192,192, 0.5);
+}
+.record-button {
+  margin-top: 30px;
+}
+.add-button {
+  margin-right: 40px;
+  margin-bottom: 40px;
+  width: 100px;
+}
+.del-button {
+  width: 100px;
+  margin-bottom: 40px;
+}
+.button-seg {
+  margin-top: 30px;
+  
 }
 </style>
