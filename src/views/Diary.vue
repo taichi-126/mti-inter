@@ -10,7 +10,7 @@
         <p class="right item">{{ month }}月</p>
         <router-link class="right item" to="/">
             <i class="calendar icon"></i>
-          </router-link>
+          </router-link>  
         </div>
       
       
@@ -287,6 +287,7 @@ export default {
     
     setDate(date) {
       window.localStorage.setItem("date", date)
+      this.$router.push({ name: "/"})
     },
     
     progressBarWidthsFunc(nutrient) {
