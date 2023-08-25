@@ -41,7 +41,7 @@ exports.handler = async (event, context) => {
   
   // ...前の部分のコード...
 
-　for (let ingredient of ingredients) {
+  for (let ingredient of ingredients) {
     const ingredientName = ingredient.name;
     const weight = ingredient.weight;
 
@@ -68,7 +68,7 @@ exports.handler = async (event, context) => {
           // 重さに基づいて栄養を計算
           let calculatedValue = ingredientNutrients[nutrient] * (weight / 100);
           // 小数点第3位で四捨五入
-        　calculatedValue = Math.round(calculatedValue * 1000) / 1000;
+          calculatedValue = Math.round(calculatedValue * 1000) / 1000;
     
           nutrients[nutrient] += calculatedValue;
         }
