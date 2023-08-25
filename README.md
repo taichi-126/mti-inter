@@ -9,7 +9,7 @@
       - [Articleテーブル](#articleテーブル)
       - [nutrients(テーブルではない)](#nutrientsテーブルではない)
       - [Dishesテーブル](#dishesテーブル)
-      - [DailyMealsTable](#dailymealstable)
+      - [DailyMealsテーブル](#dailymealsテーブル)
       - [Ingredientsテーブル](#ingredientsテーブル)
     - [Web REST API 設計](#web-rest-api-設計)
       - [Userテーブルに関するAPI](#userテーブルに関するapi)
@@ -137,7 +137,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 
 ---
 
-#### DailyMealsTable
+#### DailyMealsテーブル
 各ユーザーがその日に何を食べたのか、そしてその日の合計栄養摂取量を保存
 
 | カラム名     | 説明                               |
