@@ -7,6 +7,7 @@ import User from '../views/User.vue';
 import Diary from '../views/Diary.vue';
 import Record from '../views/Record.vue';
 import FoodRecord from '../views/FoodRecord.vue';
+import Chat from "../views/Chat.vue"
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -66,7 +67,16 @@ const router = createRouter({
       meta: {
         title: "FoodRecord"
       }
+    },
+{
+      path: "/chat",
+      name: "Chat",
+      component: Chat,
+      meta: {
+        title: "Chat"
+      }
     }
+    
   ]
 })
 

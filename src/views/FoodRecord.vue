@@ -4,6 +4,13 @@
       <!-- 基本的なコンテンツはここに記載する -->
 
 <div class="main-content">
+  <div class="back-button">
+    <i class="left chevron icon"></i>
+    <div class="padding-button"></div>
+    <button class="circular ui icon button" @click="backPage">
+      戻る
+      </button>
+  </div>
   <h2>食品名</h2>
 <h2>{{ newMeal }}</h2>
   <table>
@@ -186,7 +193,12 @@ export default {
     
     selectQuantity(index) {
       this.pointedIngredients[index]["weight"] = this.quantitys[index]
+    },
+    
+    backPage() {
+      this.$router.push({ name: "Record"})
     }
+    
     
   },
   
@@ -249,5 +261,11 @@ table {
 }
 h2 {
   padding-top: 30px;  
+}
+.back-button {
+  display: flex;
+}
+.padding-button {
+  width: 10px;
 }
 </style>
