@@ -1,15 +1,18 @@
 # ヴィーガン向け体調管理アプリ
 
 ## 目次
+  - [目次](#目次)
   - [設計](#設計)
     - [テーブル図](#テーブル図)
       - [Userテーブル](#userテーブル)
+      - [Articleテーブル](#articleテーブル)
       - [nutrients(テーブルではない)](#nutrientsテーブルではない)
       - [Dishesテーブル](#dishesテーブル)
-      - [DailyMealsTable](#dailymealstable)
+      - [DailyMealsテーブル](#dailymealsテーブル)
       - [Ingredientsテーブル](#ingredientsテーブル)
     - [Web REST API 設計](#web-rest-api-設計)
       - [Userテーブルに関するAPI](#userテーブルに関するapi)
+      - [Articleテーブルに関するAPI](#articleテーブルに関するapi)
       - [Dishesテーブルに関するAPI](#dishesテーブルに関するapi)
       - [DailyMealsTableに関するAPI](#dailymealstableに関するapi)
       - [IngredientsTableに関するAPI](#ingredientstableに関するapi)
@@ -17,6 +20,9 @@
       - [User関連](#user関連)
         - [POST `/user/signup`](#post-usersignup)
         - [GET `/user`](#get-user)
+      - [Article関連](#article関連)
+        - [POST `/article`](#post-article)
+        - [GET `/articles`](#get-articles)
       - [dishes関連](#dishes関連)
         - [POST `/dishes`](#post-dishes)
         - [GET `/dishes`](#get-dishes)
@@ -35,6 +41,7 @@
 ```mermaid
 classDiagram
     User -- DailyMeals : 1 - n (ユーザーは多数の食事記録を持つ)
+    User -- Article : 1 - n (ユーザーは多数の投稿を持つ)
     User -- Dishes : 1 - n (ユーザーは多数の料理を持つ)
     Ingredients -- Dishes : 1 - n (1つの原材料は多数の料理に使われる)
     DailyMeals -- Dishes : 1 - n (1つの食事記録は多数の料理から成る)
@@ -47,6 +54,13 @@ classDiagram
         height
 　　　　　　　　　　　　　　　　weight
         dailyNutrientGoals
+    }
+
+    class Article {
+       +userId(PK)
+       +timestamp(SK)
+       category
+       text
     }
 
     class Dishes {
@@ -83,6 +97,16 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | weight     | 体重 |
 | dailyNutrientGoals | 1日に取るべき栄養素の目標値(map) 例:{"protein":300, "dhc":100} |
 
+----
+#### Articleテーブル
+
+| カラム名  | 説明       |
+|---------|-----------|
+| userId  | ユーザーID (パーティションキー) |
+| timestamp | 投稿日時 (ソートキー)   |
+| category     | 投稿のタグ. オプション.     |
+| text | 記事の内容. |
+
 ---
 #### nutrients(テーブルではない)
 マップ形式で返される各栄養素の名前.
@@ -112,7 +136,7 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 
 ---
 
-#### DailyMealsTable
+#### DailyMealsテーブル
 各ユーザーがその日に何を食べたのか、そしてその日の合計栄養摂取量を保存
 
 | カラム名     | 説明                               |
@@ -163,6 +187,14 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
 | 削除   | DELETE | ユーザー削除. | `/user?userId` | userId                                             | success/error |
 | 変更 | PUT | ユーザー情報を変更. | `/user?userId` | userId | succes/error, dailyNutrientGoals |
 | ログイン | POST | ユーザーのログイン. | `/user/login` | userId, password | success/error, token |
+
+#### Articleテーブルに関するAPI
+
+| 操作   | Method | 処理の内容 | Endpoint           | リクエストパラメータ         | レスポンス内容                  |
+|--------|----|----|--------------------|-----------------------------------------------|------------------------------|
+| 投稿 | POST | 新しい記事の投稿. | `/article` | userId, text, category | success/error, timestamp |
+| 削除 | DELETE | 記事の削除. | `/article?userId&timestamp` | userId, timestamp | success/error |
+| 取得　|　GET　| 条件に応じて記事の一覧を取得する. | `/articles` | userId, (start, end, category) | articleのリスト |
 
 #### Dishesテーブルに関するAPI
 
@@ -245,6 +277,48 @@ dailyNutirientsGoalsはバックエンド側で計算して返す.
     },
 }
 ```
+----
+#### Article関連
+##### POST `/article`
+```
+//request
+{
+    "userId": "team3",
+    "text": "豆乳高い....",
+    "category": "sad"
+}
+```
+```
+//respone
+{
+    "userId": "team3",
+    "text": "豆乳高い....",
+    "category": "sad",
+    "timestamp": 1692937080043
+}
+```
+
+##### GET `/articles`
+```
+//userIdを指定. 必要に応じてカテゴリーや日時の絞り込みパラメータをつける.
+{
+    "articles": [
+        {
+            "category": "sad",
+            "text": "豆乳高い....",
+            "userId": "team3",
+            "timestamp": 1692937080043
+        },
+        {
+            "category": "good",
+            "text": "豆腐ハンバーグ美味しかった.",
+            "userId": "team3",
+            "timestamp": 1692935683063
+        }
+    ]
+}
+```
+
 ----
 
 #### dishes関連
