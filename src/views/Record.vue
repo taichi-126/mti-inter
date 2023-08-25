@@ -4,6 +4,13 @@
       <!-- 基本的なコンテンツはここに記載する -->
 
 <div class="main-content">
+  <div class="back-button">
+    <i class="left chevron icon"></i>
+    <div class="padding-button"></div>
+    <button class="circular ui icon button" @click="backPage">
+      戻る
+      </button>
+  </div>
   <h2>今日の食事</h2>
   <table>
     <thead>
@@ -203,6 +210,10 @@ export default {
     
     selectQuantity(index) {
       this.meals[index]["quantity"] = this.quantitys[index]
+    },
+    
+    backPage() {
+      this.$router.push({ name: "Diary"})
     }
     
   },
@@ -272,5 +283,11 @@ table {
 }
 h2 {
   padding-top: 30px;  
+}
+.back-button {
+  display: flex;
+}
+.padding-button {
+  width: 10px;
 }
 </style>

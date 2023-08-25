@@ -46,6 +46,8 @@
       あなたは、豆腐ハンバーグを食べよう！！！
       <br>
       
+      <img src="../assets/imgs/advice.png" width="100">
+      
     </div>
     
     <div class="chart-seqment">
@@ -72,6 +74,17 @@
             <button class="ui  green fluid button" @click="submit">
               <i class="plus icon"></i>
               <p>食事を記録する</p>
+            </button>
+        </div>
+      
+    <div class="content">
+    </div>
+      
+    <!-- 掲示板的な機能 -->
+      <div class="chat-button">
+            <button class="ui  green fluid button" @click="chatPage">
+              <i class="chat icon"></i>
+              <p>Timeライン</p>
             </button>
         </div>
       </div>
@@ -284,6 +297,10 @@ export default {
     logout() {
       window.localStorage.clear();
       this.$router.push({ name : "Login" })
+    },
+    
+    async chatPage() {
+      this.$router.push({ name: "Chat"})
     },
     
     async submit() {
